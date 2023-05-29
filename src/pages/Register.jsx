@@ -3,6 +3,8 @@ import { Logo } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
 import { FormRow } from "../components";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { loginUser, registerUser } from "../Features/user/userSlice";
 
 const initialState = {
 	name: "",
@@ -19,9 +21,15 @@ const Register = () => {
 	};
 	const submitHandler = (e) => {
 		const { isMember, email, name, password } = values;
-
+		const dispatch = useDispatch();
 		if (!email || !password || (!isMember && !name)) {
 			toast.error("please fill all fields!!");
+		} else {
+			if (isMember) {
+				dispatch(loginUser(values));
+			} else {
+				dispatch(registerUser(values));
+			}
 		}
 
 		e.preventDefault();
