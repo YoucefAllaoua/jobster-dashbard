@@ -11,7 +11,9 @@ const initialState = {
 
 const Register = () => {
 	const [values, setValues] = useState(initialState);
-	const handleChange = (e) => {};
+	const handleChange = (key, value) => {
+		setValues({ ...values, [key]: value });
+	};
 	const submitHandler = (e) => {
 		e.preventDefault();
 	};
@@ -24,7 +26,7 @@ const Register = () => {
 			<form onSubmit={submitHandler} className="form">
 				<Logo />
 				<h3>{values.isMember ? "Login" : "Register"}</h3>
-				<FormRow name={"name"} type={"text"} value={values.name} labelText={"name"} handleChange={handleChange} />
+				{!values.isMember && <FormRow name={"name"} type={"text"} value={values.name} labelText={"name"} handleChange={handleChange} />}
 				<FormRow name={"email"} type={"email"} value={values.email} labelText={"email"} handleChange={handleChange} />
 				<FormRow name={"password"} type={"password"} value={values.password} labelText={"password"} handleChange={handleChange} />
 				<button type="submit" className=" btn btn-block ">
