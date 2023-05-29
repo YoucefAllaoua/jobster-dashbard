@@ -16,6 +16,12 @@ const Register = () => {
 		setValues({ ...values, [e.target.name]: e.target.value });
 	};
 	const submitHandler = (e) => {
+		const { isMember, email, name, password } = values;
+
+		if (!email || !password || (!isMember && !name)) {
+			console.log("please fill all fields ");
+		}
+
 		e.preventDefault();
 	};
 	// this function is to toggle between the register and login form
