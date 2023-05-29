@@ -7,7 +7,7 @@ const Error = () => {
 			<div className="">
 				<img src={img} alt="not found" />
 				<h3>Oooh ! something went Wrong</h3>
-				<p>text</p>
+				<p>We can not find the page your are looking for !</p>
 				<NavLink to="/">back Home</NavLink>
 			</div>
 		</Wrapper>
