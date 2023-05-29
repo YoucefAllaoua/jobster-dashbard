@@ -14,14 +14,16 @@ const initialState = {
 };
 
 const Register = () => {
+	const dispatch = useDispatch();
+
 	const [values, setValues] = useState(initialState);
 	const handleChange = (e) => {
 		// the brackets to make a dynamic key
 		setValues({ ...values, [e.target.name]: e.target.value });
 	};
 	const submitHandler = (e) => {
+		e.preventDefault();
 		const { isMember, email, name, password } = values;
-		const dispatch = useDispatch();
 		if (!email || !password || (!isMember && !name)) {
 			toast.error("please fill all fields!!");
 		} else {

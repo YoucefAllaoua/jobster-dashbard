@@ -7,6 +7,9 @@ const initialState = {
 };
 // this function is for the register
 export const registerUser = createAsyncThunk("user register", async (userInfo, thunkApi) => {
+	console.log(userInfo);
+	console.log(userInfo + "register");
+
 	const url = "";
 	try {
 		const { data } = await axios.post(url, userInfo);
@@ -18,6 +21,8 @@ export const registerUser = createAsyncThunk("user register", async (userInfo, t
 });
 export const loginUser = createAsyncThunk("user register", async (userInfo, thunkApi) => {
 	const url = "";
+	console.log(userInfo + "login");
+
 	try {
 		const { data } = await axios.post(url, userInfo);
 		console.log(data);
