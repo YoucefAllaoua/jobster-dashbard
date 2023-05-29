@@ -11,8 +11,9 @@ const initialState = {
 
 const Register = () => {
 	const [values, setValues] = useState(initialState);
-	const handleChange = (key, value) => {
-		setValues({ ...values, [key]: value });
+	const handleChange = (e) => {
+		// the brackets to make a dynamic key
+		setValues({ ...values, [e.target.name]: e.target.value });
 	};
 	const submitHandler = (e) => {
 		e.preventDefault();
