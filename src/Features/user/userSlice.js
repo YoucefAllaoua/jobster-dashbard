@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { customFetch } from "../../utils/axios";
-import { addUserToLocalStorage, getUserFromLocalStorage } from "../../utils/localStorage";
+import { addUserToLocalStorage, getUserFromLocalStorage, removeUserFromLocalStorage } from "../../utils/localStorage";
 
 const initialState = {
 	isLoading: false,
@@ -36,7 +36,12 @@ export const loginUser = createAsyncThunk("user login", async (userInfo, thunkAp
 const userSlice = createSlice({
 	name: "user",
 	initialState,
-	reducers: {},
+	reducers: {
+		logout: (state) => {
+			state.user = null;
+			removeUserFromLocalStorage();
+		},
+	},
 	extraReducers: {
 		[loginUser.fulfilled]: (state, { payload }) => {
 			state.isLoading = false;
@@ -69,3 +74,4 @@ const userSlice = createSlice({
 	},
 });
 export default userSlice.reducer;
+export const { logout } = userSlice.actions;

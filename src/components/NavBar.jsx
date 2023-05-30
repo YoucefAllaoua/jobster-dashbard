@@ -4,11 +4,14 @@ import Logo from "./Logo";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSideBar } from "../Features/Sidebar/SideBarSlice";
+import { logout } from "../Features/user/userSlice";
 
 const NavBar = () => {
 	const { user } = useSelector((store) => store.user);
-	console.log(user);
+
 	const dispatch = useDispatch();
+	//    this state is for the dropDown btn for the logout
+	const [dropDown, setDropDown] = useState(false);
 	return (
 		<Wrapper>
 			<div className="nav-center">
@@ -20,13 +23,13 @@ const NavBar = () => {
 					<h3 className="logo-text">Dashboard</h3>
 				</div>
 				<div className="btn-container">
-					<button type="button" className="btn" onClick={() => console.log("toggle logout dropdown")}>
+					<button type="button" className="btn" onClick={() => setDropDown(!dropDown)}>
 						<FaUserCircle />
 						{user?.name}
 						<FaCaretDown />
 					</button>
-					<div className="dropdown show-dropdown">
-						<button type="button" className="dropdown-btn" onClick={() => console.log("logout text")}>
+					<div className={`${dropDown ? "dropdown show-dropdown" : "dropdown "}`}>
+						<button type="button" className="dropdown-btn" onClick={() => dispatch(logout())}>
 							logout
 						</button>
 					</div>
