@@ -16,7 +16,7 @@ const initialState = {
 const Register = () => {
 	const dispatch = useDispatch();
 	const { isLoading } = useSelector((store) => store.user);
-	console.log(isLoading);
+
 	const [values, setValues] = useState(initialState);
 	const handleChange = (e) => {
 		// the brackets to make a dynamic key
@@ -29,9 +29,9 @@ const Register = () => {
 			toast.error("please fill out  all  fields!!");
 		} else {
 			if (isMember) {
-				dispatch(loginUser({ email: email, password: password }));
+				if (!isLoading) dispatch(loginUser({ email: email, password: password }));
 			} else {
-				dispatch(registerUser({ email: email, password: password, name: name }));
+				if (!isLoading) dispatch(registerUser({ email: email, password: password, name: name }));
 			}
 		}
 
@@ -43,14 +43,19 @@ const Register = () => {
 	};
 	return (
 		<Wrapper className=" full-page ">
-			<form onSubmit={submitHandler} className="form">
+			<form
+				onSubmit={(e) => {
+					submitHandler(e);
+				}}
+				className="form"
+			>
 				<Logo />
 				<h3>{values.isMember ? "Login" : "Register"}</h3>
 				{!values.isMember && <FormRow name={"name"} type={"text"} value={values.name} labelText={"name"} handleChange={handleChange} />}
 				<FormRow name={"email"} type={"email"} value={values.email} labelText={"email"} handleChange={handleChange} />
 				<FormRow name={"password"} type={"password"} value={values.password} labelText={"password"} handleChange={handleChange} />
-				<button type="submit" className=" btn btn-block ">
-					submit
+				<button style={{ display: "flex", justifyContent: "center", alignItems: "center", cursor: `${isLoading ? "default" : "pointer"}` }} type="submit" className=" btn btn-block ">
+					{isLoading ? <Oval height="20" width="20" radius="9" color="grey" ariaLabel="three-dots-loading" /> : "Submit"}
 				</button>
 				<p className="  ">
 					{!values.isMember ? "Already a member ? " : " Not a member yet ?"}

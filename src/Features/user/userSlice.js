@@ -24,7 +24,6 @@ export const loginUser = createAsyncThunk("user register", async (userInfo, thun
 
 	try {
 		const { data } = await axios.post(url, userInfo);
-		console.log(data);
 		return `Welcome back ${userInfo.name}`;
 	} catch (error) {
 		console.log(error);
