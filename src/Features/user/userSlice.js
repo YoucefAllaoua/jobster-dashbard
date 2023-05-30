@@ -11,10 +11,9 @@ const initialState = {
 export const registerUser = createAsyncThunk("user register", async (userInfo, thunkApi) => {
 	const url = "/auth/testingRegister";
 	try {
-		const {
-			data: { user },
-		} = await customFetch.post(url, userInfo);
-		return user;
+		const { data } = await customFetch.post(url, userInfo);
+		
+		return data.user;
 	} catch (error) {
 		return thunkApi.rejectWithValue(error.response.data.msg);
 	}
@@ -48,12 +47,11 @@ const userSlice = createSlice({
 		[registerUser.fulfilled]: (state, action) => {
 			state.user = action.payload;
 			state.isLoading = false;
-			console.log(state.user);
 			toast.success(`Hello ${state.user.name} `);
 		},
 		[registerUser.rejected]: (state, action) => {
-			toast.error(action.payload);
 			state.isLoading = false;
+			toast.error(action.payload);
 		},
 		[registerUser.pending]: (state) => {
 			state.isLoading = true;

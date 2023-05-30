@@ -29,9 +29,9 @@ const Register = () => {
 			toast.error("please fill out  all  fields!!");
 		} else {
 			if (isMember) {
-				if (!isLoading) dispatch(loginUser({ email: email, password: password }));
+				dispatch(loginUser({ email: email, password: password }));
 			} else {
-				if (!isLoading) dispatch(registerUser({ email: email, password: password, name: name }));
+				dispatch(registerUser({ email: email, password: password, name: name }));
 			}
 		}
 
@@ -54,7 +54,7 @@ const Register = () => {
 				{!values.isMember && <FormRow name={"name"} type={"text"} value={values.name} labelText={"name"} handleChange={handleChange} />}
 				<FormRow name={"email"} type={"email"} value={values.email} labelText={"email"} handleChange={handleChange} />
 				<FormRow name={"password"} type={"password"} value={values.password} labelText={"password"} handleChange={handleChange} />
-				<button style={{ display: "flex", justifyContent: "center", alignItems: "center", cursor: `${isLoading ? "default" : "pointer"}` }} type="submit" className=" btn btn-block ">
+				<button style={{ display: "flex", justifyContent: "center", alignItems: "center" }} type="submit" className=" btn btn-block " disabled={isLoading}>
 					{isLoading ? <Oval height="20" width="20" radius="9" color="grey" ariaLabel="three-dots-loading" /> : "Submit"}
 				</button>
 				<p className="  ">
