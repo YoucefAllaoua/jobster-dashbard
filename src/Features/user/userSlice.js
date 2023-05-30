@@ -4,7 +4,7 @@ import axios from "axios";
 import { customFetch } from "../../utils/axios";
 
 const initialState = {
-	isLoading: true,
+	isLoading: false,
 	user: null,
 };
 // this function is for the register
@@ -16,7 +16,7 @@ export const registerUser = createAsyncThunk("user register", async (userInfo, t
 		} = await customFetch.post(url, userInfo);
 		return user;
 	} catch (error) {
-		return thunkApi.rejectWithValue("something went Wrong !");
+		return thunkApi.rejectWithValue(error.response.data.msg);
 	}
 });
 export const loginUser = createAsyncThunk("user register", async (userInfo, thunkApi) => {
@@ -27,6 +27,7 @@ export const loginUser = createAsyncThunk("user register", async (userInfo, thun
 		console.log(data);
 		return `Welcome back ${userInfo.name}`;
 	} catch (error) {
+		console.log(error);
 		return thunkApi.rejectWithValue("something went Wrong !");
 	}
 });
@@ -51,7 +52,8 @@ const userSlice = createSlice({
 			console.log(state.user);
 			toast.success(`Hello ${state.user.name} `);
 		},
-		[registerUser.rejected]: (state) => {
+		[registerUser.rejected]: (state, action) => {
+			toast.error(action.payload);
 			state.isLoading = false;
 		},
 		[registerUser.pending]: (state) => {

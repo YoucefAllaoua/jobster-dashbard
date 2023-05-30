@@ -3,9 +3,9 @@ import { Logo } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
 import { FormRow } from "../components";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser, registerUser } from "../Features/user/userSlice";
-
+import { Oval } from "react-loader-spinner";
 const initialState = {
 	name: "",
 	email: "",
@@ -15,7 +15,8 @@ const initialState = {
 
 const Register = () => {
 	const dispatch = useDispatch();
-
+	const { isLoading } = useSelector((store) => store.user);
+	console.log(isLoading);
 	const [values, setValues] = useState(initialState);
 	const handleChange = (e) => {
 		// the brackets to make a dynamic key
@@ -25,7 +26,7 @@ const Register = () => {
 		e.preventDefault();
 		const { isMember, email, name, password } = values;
 		if (!email || !password || (!isMember && !name)) {
-			toast.error("please fill all out fields!!");
+			toast.error("please fill out  all  fields!!");
 		} else {
 			if (isMember) {
 				dispatch(loginUser({ email: email, password: password }));
