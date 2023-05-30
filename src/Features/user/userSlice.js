@@ -42,6 +42,16 @@ const userSlice = createSlice({
 		[loginUser.pending]: (state) => {
 			state.isLoading = true;
 		},
+		[registerUser.fulfilled]: (state) => {
+			state.user = "";
+			state.isLoading = false;
+		},
+		[registerUser.rejected]: (state) => {
+			state.isLoading = false;
+		},
+		[registerUser.pending]: (state) => {
+			state.isLoading = true;
+		},
 	},
 });
 export default userSlice.reducer;

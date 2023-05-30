@@ -28,9 +28,9 @@ const Register = () => {
 			toast.error("please fill all fields!!");
 		} else {
 			if (isMember) {
-				dispatch(loginUser(values));
+				dispatch(loginUser({ email: email, password: password }));
 			} else {
-				dispatch(registerUser(values));
+				dispatch(registerUser({ email: email, password: password, name: name }));
 			}
 		}
 
