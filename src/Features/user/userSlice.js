@@ -8,12 +8,12 @@ const initialState = {
 	isLoading: false,
 	user: getUserFromLocalStorage(),
 };
+
 // this function is for the register
 export const registerUser = createAsyncThunk("user register", async (userInfo, thunkApi) => {
 	const url = "/auth/register";
 	try {
 		const { data } = await customFetch.post(url, userInfo);
-		addUserToLocalStorage(data.user);
 		return data.user;
 	} catch (error) {
 		return thunkApi.rejectWithValue(error.response.data.msg);
@@ -41,6 +41,8 @@ const userSlice = createSlice({
 		[loginUser.fulfilled]: (state, { payload }) => {
 			state.isLoading = false;
 			state.user = payload;
+			addUserToLocalStorage(state.user);
+
 			toast.success("hello back" + " " + state.user.name);
 		},
 		[loginUser.rejected]: (state, { payload }) => {
@@ -53,6 +55,8 @@ const userSlice = createSlice({
 		[registerUser.fulfilled]: (state, action) => {
 			state.user = action.payload;
 			state.isLoading = false;
+			addUserToLocalStorage(state.user);
+
 			toast.success(`Hello ${state.user.name} `);
 		},
 		[registerUser.rejected]: (state, action) => {

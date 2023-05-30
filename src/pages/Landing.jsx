@@ -3,6 +3,7 @@ import logo from "../assets/images/logo.svg";
 import main from "../assets/images/main.svg";
 import { Logo } from "../components";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // this wrapper is only responsible of styling
 // we can use it above or below
@@ -44,6 +45,7 @@ const Wrapper = styled.main`
 	}
 `;
 const Landing = () => {
+	const { user } = useSelector((store) => store.user);
 	return (
 		<Wrapper>
 			<nav>
@@ -55,7 +57,7 @@ const Landing = () => {
 						job <span>tracking</span> app
 					</h1>
 					<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt maiores impedit hic, unde repellat ipsa cumque natus doloremque nihil, esse cupiditate praesentium. Voluptas, et? Non totam deleniti hic ad libero.</p>
-					<NavLink to="/register" className="btn btn-hero">
+				   	<NavLink to="/register" className="btn btn-hero">
 						login/register
 					</NavLink>
 				</div>

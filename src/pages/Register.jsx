@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, registerUser } from "../Features/user/userSlice";
 import { Oval } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 const initialState = {
 	name: "",
 	email: "",
@@ -15,8 +16,16 @@ const initialState = {
 
 const Register = () => {
 	const dispatch = useDispatch();
-	const { isLoading } = useSelector((store) => store.user);
-
+	const { isLoading, user } = useSelector((store) => store.user);
+	const navigate = useNavigate();
+	// this function is to navigate to the home when the user is registred or lohedin
+	useEffect(() => {
+		console.log(user);
+		if (user)
+			setTimeout(() => {
+				navigate("/");
+			}, 3000);
+	}, [user, navigate]);
 	const [values, setValues] = useState(initialState);
 	const handleChange = (e) => {
 		// the brackets to make a dynamic key
