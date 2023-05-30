@@ -11,8 +11,8 @@ const initialState = {
 export const registerUser = createAsyncThunk("user register", async (userInfo, thunkApi) => {
 	const url = "/auth/testingRegister";
 	try {
-		const { data } = await customFetch.post(url, userInfo);
-		
+		const data = await customFetch.post(url, userInfo);
+		console.log(data);
 		return data.user;
 	} catch (error) {
 		return thunkApi.rejectWithValue(error.response.data.msg);
