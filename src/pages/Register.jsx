@@ -25,7 +25,7 @@ const Register = () => {
 		e.preventDefault();
 		const { isMember, email, name, password } = values;
 		if (!email || !password || (!isMember && !name)) {
-			toast.error("please fill all fields!!");
+			toast.error("please fill all out fields!!");
 		} else {
 			if (isMember) {
 				dispatch(loginUser({ email: email, password: password }));

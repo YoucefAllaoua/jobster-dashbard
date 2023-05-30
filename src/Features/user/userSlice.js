@@ -1,17 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { customFetch } from "../../utils/axios";
+
 const initialState = {
 	isLoading: true,
 	user: null,
 };
 // this function is for the register
 export const registerUser = createAsyncThunk("user register", async (userInfo, thunkApi) => {
-	const url = "";
+	const url = "/auth/testingRegister";
 	try {
-		const { data } = await axios.post(url, userInfo);
-		console.log(data);
-		return "user registered with success !";
+		const {
+			data: { user },
+		} = await customFetch.post(url, userInfo);
+		return user;
 	} catch (error) {
 		return thunkApi.rejectWithValue("something went Wrong !");
 	}
@@ -42,9 +45,11 @@ const userSlice = createSlice({
 		[loginUser.pending]: (state) => {
 			state.isLoading = true;
 		},
-		[registerUser.fulfilled]: (state) => {
-			state.user = "";
+		[registerUser.fulfilled]: (state, action) => {
+			state.user = action.payload;
 			state.isLoading = false;
+			console.log(state.user);
+			toast.success(`Hello ${state.user.name} `);
 		},
 		[registerUser.rejected]: (state) => {
 			state.isLoading = false;
