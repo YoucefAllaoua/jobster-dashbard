@@ -3,15 +3,16 @@ import Wrapper from "../assets/wrappers/Navbar";
 import Logo from "./Logo";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toggleSideBar } from "../Features/Sidebar/SideBarSlice";
 
 const NavBar = () => {
-    const { user } = useSelector((store) => store.user);
-    console.log(user);
+	const { user } = useSelector((store) => store.user);
+	console.log(user);
 	const dispatch = useDispatch();
 	return (
 		<Wrapper>
 			<div className="nav-center">
-				<button onClick={() => console.log("toggle sidebar")} type="button" className="toggle-btn">
+				<button onClick={() => dispatch(toggleSideBar())} type="button" className="toggle-btn">
 					<FaAlignLeft />
 				</button>
 				<div>
