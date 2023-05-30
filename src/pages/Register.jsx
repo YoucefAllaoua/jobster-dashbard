@@ -55,7 +55,7 @@ const Register = () => {
 				<FormRow name={"email"} type={"email"} value={values.email} labelText={"email"} handleChange={handleChange} />
 				<FormRow name={"password"} type={"password"} value={values.password} labelText={"password"} handleChange={handleChange} />
 				<button style={{ display: "flex", justifyContent: "center", alignItems: "center" }} type="submit" className=" btn btn-block " disabled={isLoading}>
-					{isLoading ? <Oval height="20" width="20" radius="9" color="grey" ariaLabel="three-dots-loading" /> : "Submit"}
+					{isLoading ? <Oval height="20" width="20" radius="9" color="white" ariaLabel="three-dots-loading" /> : "Submit"}
 				</button>
 				<p className="  ">
 					{!values.isMember ? "Already a member ? " : " Not a member yet ?"}
