@@ -5,13 +5,14 @@ import { Wrapper } from "../../assets/wrappers/DashboardFormPage";
 import { toast } from "react-toastify";
 
 const Profile = () => {
-	const { user } = useSelector((store) => store.user);
-	const useInfo = useState({
+	const { isLoading, user } = useSelector((store) => store.user);
+	const [useInfo, setUserInfo] = useState({
 		name: user?.name || "",
 		email: user?.email || "",
 		location: user?.location || "",
 		lastName: user?.lastName || "",
 	});
-	return <div>Profile</div>;
+	const dispatch = useDispatch();
+	return <Wrapper></Wrapper>;
 };
 export default Profile;
