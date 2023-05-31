@@ -4,4 +4,5 @@ import BigSideBar from "./BigSideBar";
 import SmallSideBar from "./SmallSideBar";
 import NavBar from "./NavBar";
 import NavLinks from "./NavLinks";
-export { NavLinks, FormRow, Logo, BigSideBar, SmallSideBar, NavBar };
+import Loader from "./Loader";
+export { Loader, NavLinks, FormRow, Logo, BigSideBar, SmallSideBar, NavBar };

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Logo } from "../components";
+import { Loader, Logo } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
 import { FormRow } from "../components";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, registerUser } from "../Features/user/userSlice";
-import { Oval } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
+
 const initialState = {
 	name: "",
 	email: "",
@@ -64,7 +64,7 @@ const Register = () => {
 				<FormRow name={"email"} type={"email"} value={values.email} labelText={"email"} handleChange={handleChange} />
 				<FormRow name={"password"} type={"password"} value={values.password} labelText={"password"} handleChange={handleChange} />
 				<button style={{ display: "flex", justifyContent: "center", alignItems: "center" }} type="submit" className=" btn btn-block " disabled={isLoading}>
-					{isLoading ? <Oval height="20" width="20" radius="9" color="white" ariaLabel="three-dots-loading" /> : "Submit"}
+					{isLoading ? <Loader /> : "Submit"}
 				</button>
 				<p className="  ">
 					{!values.isMember ? "Already a member ? " : " Not a member yet ?"}

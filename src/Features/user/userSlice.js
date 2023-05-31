@@ -33,10 +33,11 @@ export const loginUser = createAsyncThunk("user login", async (userInfo, thunkAp
 	}
 });
 // this function is to update the user info
-const updateInfo = createAsyncThunk("auth/updateInfo", async (info, thunkApi) => {
-	const url = "";
+export const updateInfo = createAsyncThunk("auth/updateInfo", async (info, thunkApi) => {
+	const url = "/auth/updateUser";
 	try {
 		const { data } = await customFetch.patch(url, info);
+		console.log(info);
 		return data;
 	} catch (error) {
 		return thunkApi.rejectWithValue(error.response.data.msg);
