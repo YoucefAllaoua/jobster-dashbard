@@ -35,10 +35,15 @@ export const loginUser = createAsyncThunk("user login", async (userInfo, thunkAp
 // this function is to update the user info
 export const updateInfo = createAsyncThunk("auth/updateInfo", async (info, thunkApi) => {
 	const url = "/auth/updateUser";
+	console.log("update");
+
 	try {
-		const { data } = await customFetch.patch(url, info);
-		console.log(info);
-		return data;
+		// the getState method of the thunkApi return  all the store (our big state)
+		const token = thunkApi.getState().user.user.token;
+		const {
+			data: { user },
+		} = await customFetch.patch(url, info, { headers: { authorization: `Bearer ${token}` } });
+		return user;
 	} catch (error) {
 		return thunkApi.rejectWithValue(error.response.data.msg);
 	}
@@ -80,6 +85,18 @@ const userSlice = createSlice({
 		},
 		[registerUser.pending]: (state) => {
 			state.isLoading = true;
+		},
+		[updateInfo.pending]: (state) => {
+			state.isLoading = true;
+		},
+		[updateInfo.fulfilled]: (state, { payload }) => {
+			state.isLoading = false;
+			state.user = payload;
+			toast.success("user updated with success");
+		},
+		[updateInfo.rejected]: (state, { payload }) => {
+			state.isLoading = false;
+			toast.error(payload);
 		},
 	},
 });

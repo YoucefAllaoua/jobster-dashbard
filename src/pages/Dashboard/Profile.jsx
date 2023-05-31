@@ -4,6 +4,7 @@ import FormRow from "../../components/FormRow";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { toast } from "react-toastify";
 import { Loader } from "../../components";
+import { updateInfo } from "../../Features/user/userSlice";
 
 const Profile = () => {
 	const { isLoading, user } = useSelector((store) => store.user);
@@ -21,7 +22,7 @@ const Profile = () => {
 			toast.error("Please fill out all fields !");
 			return;
 		}
-		dispatch(updateUserInfo(userInfo));
+		dispatch(updateInfo(userInfo));
 	};
 	const handleChange = (e) => {
 		console.log(e);
@@ -39,8 +40,8 @@ const Profile = () => {
 					<FormRow type="text" name="lastName" value={userInfo.lastName} labelText="last name" handleChange={handleChange} />
 					<FormRow type="email" name="email" value={userInfo.email} labelText="email" handleChange={handleChange} />
 					<FormRow type="text" name="location" value={userInfo.location} labelText="location" handleChange={handleChange} />
-					<button className="btn btn-block" type="submit" disabled={isLoading}>
-						{isLoading ? <Loader /> : "submit"}
+					<button style={{ display: "flex", justifyContent: "center", alignItems: "center" }} className="btn btn-block" type="submit" disabled={isLoading}>
+						{isLoading ? <Loader /> : "Save changes"}
 					</button>
 				</div>
 			</form>
