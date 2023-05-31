@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { customFetch } from "../../utils/axios";
 import { addUserToLocalStorage, getUserFromLocalStorage, removeUserFromLocalStorage } from "../../utils/localStorage";
 
@@ -29,6 +28,16 @@ export const loginUser = createAsyncThunk("user login", async (userInfo, thunkAp
 		addUserToLocalStorage(user);
 
 		return user;
+	} catch (error) {
+		return thunkApi.rejectWithValue(error.response.data.msg);
+	}
+});
+// this function is to update the user info
+const updateInfo = createAsyncThunk("auth/updateInfo", async (info, thunkApi) => {
+	const url = "";
+	try {
+		const { data } = await customFetch.patch(url, info);
+		return data;
 	} catch (error) {
 		return thunkApi.rejectWithValue(error.response.data.msg);
 	}
