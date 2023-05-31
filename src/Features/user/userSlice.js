@@ -42,9 +42,16 @@ export const updateInfo = createAsyncThunk("auth/updateInfo", async (info, thunk
 		const token = thunkApi.getState().user.user.token;
 		const {
 			data: { user },
-		} = await customFetch.patch(url, info, { headers: { authorization: `Bearer ${token}` } });
+		} = await customFetch.patch(url, info);
 		return user;
 	} catch (error) {
+		// we will check if the user is not authorized so we will log it out
+		if (error.response.status === 401) {
+			setTimeout(() => {
+				thunkApi.dispatch(logout());
+			}, 3000);
+			return thunkApi.rejectWithValue("Unauthorized logging Out ...");
+		}
 		return thunkApi.rejectWithValue(error.response.data.msg);
 	}
 });

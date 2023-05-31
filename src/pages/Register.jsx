@@ -20,7 +20,6 @@ const Register = () => {
 	const navigate = useNavigate();
 	// this function is to navigate to the home when the user is registred or lohedin
 	useEffect(() => {
-		console.log(user);
 		if (user)
 			setTimeout(() => {
 				navigate("/");
