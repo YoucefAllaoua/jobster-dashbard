@@ -16,7 +16,7 @@ const initialState = {
 	editJobId: "",
 };
 
-export const addJob = createAsyncThunk("add job", async (info, thunkApi) => {
+export const addSingleJob = createAsyncThunk("add job", async (info, thunkApi) => {
 	const url = "";
 	try {
 	} catch (error) {}
