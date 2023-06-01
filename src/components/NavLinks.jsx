@@ -1,12 +1,7 @@
 import links from "../utils/links";
-import { IoBarChartSharp } from "react-icons/io5";
-import { MdQueryStats } from "react-icons/md";
-import { FaWpforms } from "react-icons/fa";
-import { ImProfile } from "react-icons/im";
+
 import { NavLink } from "react-router-dom";
 const NavLinks = ({ toggle }) => {
-	const icons = [<IoBarChartSharp />, <MdQueryStats />, <FaWpforms />, <ImProfile />];
-
 	return (
 		<div className="nav-links">
 			{links.map((item, index) => {
@@ -19,7 +14,7 @@ const NavLinks = ({ toggle }) => {
 						key={item.id}
 						onClick={toggle}
 					>
-						<span className="icon">{icons[index]}</span>
+						<span className="icon">{item.icon}</span>
 						{item.text}
 					</NavLink>
 				);

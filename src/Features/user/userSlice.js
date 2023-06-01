@@ -7,6 +7,9 @@ const initialState = {
 	isLoading: false,
 	user: getUserFromLocalStorage(),
 };
+// to make the code cleaner we can set up a file with all the async function
+// we return those functions in the callBack function
+// so those functions must return a promise and we return them in the call back function of the createAsyncThunk
 
 // this function is for the register
 export const registerUser = createAsyncThunk("user register", async (userInfo, thunkApi) => {
