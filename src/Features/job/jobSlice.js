@@ -16,6 +16,7 @@ const initialState = {
 	editJobId: "",
 };
 
+const addJob = createAsyncThunk("addJob")
 const jobSlice = createSlice({
 	name: "job",
 	initialState,
