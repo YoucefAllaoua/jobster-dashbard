@@ -16,7 +16,17 @@ const initialState = {
 	editJobId: "",
 };
 
-const addJob = createAsyncThunk("addJob")
+export const addJob = createAsyncThunk("add job", async (info, thunkApi) => {
+	const url = "";
+	try {
+	} catch (error) {}
+});
+export const editJob = createAsyncThunk("edit job", async (info, thunkApi) => {
+	const url = "";
+	try {
+	} catch (error) {}
+});
+const addJob = createAsyncThunk("addJob");
 const jobSlice = createSlice({
 	name: "job",
 	initialState,
