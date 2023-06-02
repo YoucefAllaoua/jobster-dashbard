@@ -3,14 +3,9 @@ import Job from "./Job";
 import Wrapper from "../assets/wrappers/JobsContainer";
 import { useDispatch, useSelector } from "react-redux";
 import BigLoader from "./BigLoader";
-import { getAllJobs } from "../Features/allJobs/allJobSlice";
 
 const JobsContainer = () => {
 	const dispatch = useDispatch();
-	useEffect(() => {
-		console.log("intial");
-		dispatch(getAllJobs());
-	}, []);
 	const { jobs, isLoading } = useSelector((store) => store.allJobs);
 	if (isLoading)
 		return (
