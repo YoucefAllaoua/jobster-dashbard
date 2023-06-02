@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { customFetch } from "../../utils/axios";
 import { getUserFromLocalStorage } from "../../utils/localStorage";
+import { logout } from "../user/userSlice";
 
 const initialState = {
 	isLoading: false,
@@ -19,14 +20,20 @@ const initialState = {
 export const addSingleJob = createAsyncThunk("add job", async (info, thunkApi) => {
 	const url = "/jobs";
 	const token = thunkApi.getState().user.user.token;
-	console.log(token);
 	try {
 		const { data } = await customFetch.post(url, info, {
 			headers: {
 				authorization: `Bearer ${token}`,
 			},
 		});
+		thunkApi.dispatch(clearValues());
 	} catch (error) {
+		if (error.response.status === 401) {
+			setTimeout(() => {
+				thunkApi.dispatch(logout());
+			}, 3000);
+			return thunkApi.rejectWithValue("You are not authorized logging out ...");
+		}
 		return thunkApi.rejectWithValue(error.response.data.msg);
 	}
 });
@@ -56,6 +63,7 @@ const jobSlice = createSlice({
 			toast.success("job added");
 		},
 		[addSingleJob.rejected]: (state, { payload }) => {
+			state.isLoading = false;
 			toast.error(payload);
 		},
 	},
