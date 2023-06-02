@@ -3,10 +3,19 @@ import { toast } from "react-toastify";
 import { addSingleJob, clearValues, editJob, setJobInfo } from "../../Features/job/jobSlice";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { FormRow, FormRowSelect, Loader } from "../../components";
+import userSlice from "../../Features/user/userSlice";
+import { useEffect } from "react";
 
 const AddJob = () => {
 	const { isLoading, position, company, jobLocation, jobType, jobTypeOptions, status, statusOptions, isEditing, editJobId } = useSelector((store) => store.job);
 	const job = useSelector((store) => store.job);
+	const {
+		user: { location },
+	} = useSelector((store) => store.user);
+	// this useEffect is te set the location by default to the user location
+	useEffect(() => {
+		dispatch(setJobInfo({ name: "jobLocation", value: location }));
+	}, []);
 	const dispatch = useDispatch();
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -42,7 +51,7 @@ const AddJob = () => {
 						<button onClick={clear} className=" btn btn-block clear-btn " type="button">
 							clear
 						</button>
-						<button className=" btn btn-block submit-btn " type="submit" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+						<button className=" btn btn-block submit-btn " type="submit" style={{ display: "flex", justifyContent: "center", alignItems: "center" }} disabled={isLoading}>
 							{isLoading ? <Loader /> : isEditing ? "Edit" : "Add"}
 						</button>
 					</div>
