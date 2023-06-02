@@ -5,4 +5,5 @@ import SmallSideBar from "./SmallSideBar";
 import NavBar from "./NavBar";
 import NavLinks from "./NavLinks";
 import Loader from "./Loader";
-export { Loader, NavLinks, FormRow, Logo, BigSideBar, SmallSideBar, NavBar };
+import FormRowSelect from "./FormRowSelect";
+export { FormRowSelect, Loader, NavLinks, FormRow, Logo, BigSideBar, SmallSideBar, NavBar };
