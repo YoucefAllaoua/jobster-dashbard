@@ -19,17 +19,18 @@ const initialState = {
 	...initialFilterState,
 };
 // this function is to get all the jobs
-const getAllJobs = createAsyncThunk("get all jobs", async (info, thunkApi) => {
-	return getAllJobsThunk(info, thunkApi);
+export const getAllJobs = createAsyncThunk("get all jobs", async (info, thunkApi) => {
+	
+	return getAllJobsThunk(jobs, thunkApi);
 });
 const allJobsSlice = createSlice({
 	name: "allJobs",
 	initialState,
 	reducers: {},
 	extraReducers: {
-		[getAllJobs.fulfilled]: (state, action) => {
+		[getAllJobs.fulfilled]: (state, { payload }) => {
 			state.isLoading = false;
-			state.jobs = action;
+			state.jobs = payload.jobs;
 		},
 		[getAllJobs.pending]: (state, action) => {
 			state.isLoading = true;
