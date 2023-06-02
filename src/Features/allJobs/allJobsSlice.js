@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { getAllJobsThunk } from "../../thunkFunctions/allJobsFunctions";
 
 const initialFiltersState = {
 	search: "",
@@ -19,6 +20,11 @@ const initialState = {
 	monthlyApplications: [],
 	...initialFiltersState,
 };
+// this function is to get all jobs
+export const getAllJobs = createAsyncThunk("get all jobs", async (_, thunkApi) => {
+	const url = `/jobs`;
+	return getAllJobsThunk(url, thunkApi);
+});
 const allJobsSlice = createSlice({
 	name: "allJobs",
 	initialState,
