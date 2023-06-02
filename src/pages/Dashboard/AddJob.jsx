@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { addSingleJob, editJob, setJobInfo } from "../../Features/job/jobSlice";
+import { addSingleJob, clearValues, editJob, setJobInfo } from "../../Features/job/jobSlice";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
-import { FormRow, FormRowSelect } from "../../components";
+import { FormRow, FormRowSelect, Loader } from "../../components";
 
 const AddJob = () => {
 	const { isLoading, position, company, jobLocation, jobType, jobTypeOptions, status, statusOptions, isEditing, editJobId } = useSelector((store) => store.job);
@@ -17,13 +17,16 @@ const AddJob = () => {
 		if (isEditing) {
 			dispatch(editJob());
 		} else {
-			dispatch(addSingleJob());
+			dispatch(addSingleJob({ position, company, jobLocation, jobType, status }));
 		}
 	};
 	const handleJobInput = (e) => {
 		const name = e.target.name;
 		const value = e.target.value;
 		dispatch(setJobInfo({ name, value }));
+	};
+	const clear = () => {
+		dispatch(clearValues());
 	};
 	return (
 		<Wrapper>
@@ -36,11 +39,11 @@ const AddJob = () => {
 					<FormRowSelect name="status" value={status} handleInput={handleJobInput} list={statusOptions} />
 					<FormRowSelect name="jobType" value={jobType} handleInput={handleJobInput} labelText="job Type" list={jobTypeOptions} />
 					<div className="btn-container">
-						<button onClick={() => console.log("clear")} className=" btn btn-block clear-btn " type="button">
+						<button onClick={clear} className=" btn btn-block clear-btn " type="button">
 							clear
 						</button>
-						<button className=" btn btn-block submit-btn " type="submit">
-							clear
+						<button className=" btn btn-block submit-btn " type="submit" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+							{isLoading ? <Loader /> : isEditing ? "Edit" : "Add"}
 						</button>
 					</div>
 				</div>

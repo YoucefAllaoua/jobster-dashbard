@@ -17,9 +17,18 @@ const initialState = {
 };
 
 export const addSingleJob = createAsyncThunk("add job", async (info, thunkApi) => {
-	const url = "";
+	const url = "/jobs";
+	const token = thunkApi.getState().user.user.token;
+	console.log(token);
 	try {
-	} catch (error) {}
+		const { data } = await customFetch.post(url, info, {
+			headers: {
+				authorization: `Bearer ${token}`,
+			},
+		});
+	} catch (error) {
+		return thunkApi.rejectWithValue(error.response.data.msg);
+	}
 });
 export const editJob = createAsyncThunk("edit job", async (info, thunkApi) => {
 	const url = "";
@@ -34,8 +43,23 @@ const jobSlice = createSlice({
 		setJobInfo: (state, action) => {
 			state[action.payload.name] = action.payload.value;
 		},
+		clearValues: (state) => {
+			return { ...initialState };
+		},
+	},
+	extraReducers: {
+		[addSingleJob.pending]: (state) => {
+			state.isLoading = true;
+		},
+		[addSingleJob.fulfilled]: (state) => {
+			state.isLoading = false;
+			toast.success("job added");
+		},
+		[addSingleJob.rejected]: (state, { payload }) => {
+			toast.error(payload);
+		},
 	},
 });
 
 export default jobSlice.reducer;
-export const { setJobInfo } = jobSlice.actions;
+export const { setJobInfo, clearValues } = jobSlice.actions;
