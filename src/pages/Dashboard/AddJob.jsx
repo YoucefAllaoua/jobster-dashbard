@@ -34,6 +34,7 @@ const AddJob = () => {
 					<FormRow type="text" name="company" value={company} handleChange={handleJobInput} />
 					<FormRow type="text" name="jobLocation" value={jobLocation} labelText="job Location" handleChange={handleJobInput} />
 					<FormRowSelect name="status" value={status} handleInput={handleJobInput} list={statusOptions} />
+					<FormRowSelect name="jobType" value={jobType} handleInput={handleJobInput} labelText="job Type" list={jobTypeOptions} />
 					<div className="btn-container">
 						<button onClick={() => console.log("clear")} className=" btn btn-block clear-btn " type="button">
 							clear
