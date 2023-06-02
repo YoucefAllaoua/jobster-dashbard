@@ -30,7 +30,12 @@ const addJob = createAsyncThunk("addJob");
 const jobSlice = createSlice({
 	name: "job",
 	initialState,
-	reducers: {},
+	reducers: {
+		setJobInfo: (state, action) => {
+			state[action.payload.name] = action.payload.value;
+		},
+	},
 });
 
 export default jobSlice.reducer;
+export const { setJobInfo } = jobSlice.actions;
