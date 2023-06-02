@@ -19,3 +19,5 @@ const allJobsSlice = createSlice({
 	name: "allJobs",
 	initialState,
 });
+
+export default allJobsSlice.reducer;

@@ -6,4 +6,7 @@ import NavBar from "./NavBar";
 import NavLinks from "./NavLinks";
 import Loader from "./Loader";
 import FormRowSelect from "./FormRowSelect";
-export { FormRowSelect, Loader, NavLinks, FormRow, Logo, BigSideBar, SmallSideBar, NavBar };
+import JobsContainer from "./JobsContainer";
+import Job from "./Job";
+import SearchContainer from "./SearchContainer";
+export { SearchContainer, Job, JobsContainer, FormRowSelect, Loader, NavLinks, FormRow, Logo, BigSideBar, SmallSideBar, NavBar };
