@@ -29,7 +29,7 @@ const Job = ({ _id, position, company, jobLocation, jobType, createdAt, status }
 				<footer>
 					<div className="actions">
 						<NavLink
-							to="/add-job"
+							to="/add-jobs"
 							className="btn edit-btn"
 							onClick={() => {
 								console.log();
