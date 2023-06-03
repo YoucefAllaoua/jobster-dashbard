@@ -15,7 +15,8 @@ const Job = ({ _id, position, company, jobLocation, jobType, createdAt, status }
 				</div>
 			</header>
 			<div className="content">
-				<div className="content-center">
+        <div className="content-center">
+          <h4>more content</h4>
 					<div className={`status ${status}  `}>{status}</div>
 				</div>
 				<footer>
