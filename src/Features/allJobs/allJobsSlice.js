@@ -28,6 +28,19 @@ export const getAllJobs = createAsyncThunk("get all jobs", async (_, thunkApi) =
 const allJobsSlice = createSlice({
 	name: "allJobs",
 	initialState,
+	reducers: {},
+	extraReducers: {
+		[getAllJobs.fulfilled]: (state, action) => {
+			state.isLoading = false;
+		},
+		[getAllJobs.rejected]: (state, action) => {
+			state.isLoading = false;
+			toast.error(action.payload);
+		},
+		[getAllJobs.pending]: (state, action) => {
+			state.isLoading = true;
+		},
+	},
 });
 
 export default allJobsSlice.reducer;
