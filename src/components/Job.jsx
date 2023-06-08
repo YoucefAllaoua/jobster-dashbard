@@ -39,7 +39,7 @@ const Job = ({ _id, position, company, jobLocation, jobType, createdAt, status }
 						</NavLink>
 						<button
 							type="button"
-							className=" btn delete-btn "
+							className=" btn delete-bt "
 							onClick={() => {
 								console.log("delete btn");
 							}}
