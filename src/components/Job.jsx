@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Job";
 import JobInfo from "./jobInfo";
-import { delteteJob } from "../Features/job/jobSlice";
+import { deleteJob } from "../Features/job/jobSlice";
 
 const Job = ({ _id, position, company, jobLocation, jobType, createdAt, status }) => {
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ const Job = ({ _id, position, company, jobLocation, jobType, createdAt, status }
               type="button"
               className=" btn delete-btn "
               onClick={() => {
-                dispatch(delteteJob(_id));
+                dispatch(deleteJob(_id));
               }}
             >
               Delete
