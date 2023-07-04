@@ -4,7 +4,7 @@ import { customFetch } from "../../utils/axios";
 import { getUserFromLocalStorage } from "../../utils/localStorage";
 import { logout } from "../user/userSlice";
 import { showLoading, hideLoading, getAllJobs } from "../allJobs/allJobsSlice";
-import { addJob } from "./JobThunk";
+import { addJob, deleteSingleJob, editSingleJob } from "./JobThunk";
 const initialState = {
   isLoading: false,
   position: "",
@@ -19,22 +19,8 @@ const initialState = {
 };
 
 export const addSingleJob = createAsyncThunk("add job", addJob);
-export const deleteJob = createAsyncThunk("/delete-job", );
-export const editJob = createAsyncThunk("edit job", async ({ job_id, job }, thunkApi) => {
-  try {
-    const url = `/jobs/${job_id}`;
-    const token = thunkApi.getState().user.user.token;
-    const { data } = await customFetch.patch(url, job, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-    thunkApi.dispatch(clearValues());
-    return data;
-  } catch (error) {
-    return thunkApi.rejectWithValue(error.response.data.msg);
-  }
-});
+export const deleteJob = createAsyncThunk("/delete-job", deleteSingleJob);
+export const editJob = createAsyncThunk("edit job", editSingleJob);
 const jobSlice = createSlice({
   name: "job",
   initialState,
