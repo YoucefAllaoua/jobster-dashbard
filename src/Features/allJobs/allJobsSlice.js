@@ -8,6 +8,8 @@ const initialFiltersState = {
   searchType: "all",
   sort: "latest",
   sortOptions: ["latest", "oldest", "a-z", "z-a"],
+  stats: [],
+  monthlyApplications: [],
 };
 
 const initialState = {
@@ -50,6 +52,20 @@ const allJobsSlice = createSlice({
       toast.error(action.payload);
     },
     [getAllJobs.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [showStats.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      console.log(payload);
+      state.stats = payload.defaultStats;
+      state.monthlyApplications = payload.monthlyApplications;
+      // state.jobs = payload.jobs;
+    },
+    [showStats.rejected]: (state, action) => {
+      state.isLoading = false;
+      toast.error(action.payload);
+    },
+    [showStats.pending]: (state, action) => {
       state.isLoading = true;
     },
   },
