@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Job";
 import JobInfo from "./jobInfo";
-import { deleteJob } from "../Features/job/jobSlice";
+import { deleteJob, setEditJob } from "../Features/job/jobSlice";
 
 const Job = ({ _id, position, company, jobLocation, jobType, createdAt, status }) => {
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const Job = ({ _id, position, company, jobLocation, jobType, createdAt, status }
               to="/add-jobs"
               className="btn edit-btn"
               onClick={() => {
-                console.log();
+                dispatch(setEditJob({ editJobId: _id, position, company, Job, jobLocation, jobType, status }));
               }}
             >
               Edit

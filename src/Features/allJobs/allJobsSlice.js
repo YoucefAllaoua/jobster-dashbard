@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { getAllJobsThunk } from "../../thunkFunctions/allJobsFunctions";
+import { getAllJobsThunk } from "./allJobsFunctions";
 
 const initialFiltersState = {
   search: "",
