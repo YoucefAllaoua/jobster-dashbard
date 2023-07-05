@@ -41,6 +41,15 @@ const allJobsSlice = createSlice({
     hideLoading: (state, action) => {
       state.isLoading = false;
     },
+    handleChange: (state, action) => {
+      const {
+        payload: { name, value },
+      } = action;
+      state[name] = value;
+    },
+    clearFilters: (state) => {
+      return { ...state, ...initialFiltersState };
+    },
   },
   extraReducers: {
     [getAllJobs.fulfilled]: (state, { payload }) => {
@@ -56,7 +65,6 @@ const allJobsSlice = createSlice({
     },
     [showStats.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log(payload);
       state.stats = payload.defaultStats;
       state.monthlyApplications = payload.monthlyApplications;
       // state.jobs = payload.jobs;
@@ -70,5 +78,5 @@ const allJobsSlice = createSlice({
     },
   },
 });
-export const { showLoading, hideLoading } = allJobsSlice.actions;
+export const { showLoading, hideLoading, clearFilters, handleChange } = allJobsSlice.actions;
 export default allJobsSlice.reducer;
