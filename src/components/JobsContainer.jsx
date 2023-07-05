@@ -9,10 +9,10 @@ const JobsContainer = () => {
   const dispatch = useDispatch();
   // this functions is to get all jobs
 
+  const { jobs, isLoading, numOfPages, totalJobs, search, page, sort, searchType, searchStatus } = useSelector((store) => store.allJobs);
   useEffect(() => {
     dispatch(getAllJobs());
-  }, []);
-  const { jobs, isLoading, numOfPages, totalJobs } = useSelector((store) => store.allJobs);
+  }, [page, search, sort, searchStatus, searchType]);
   if (isLoading)
     return (
       <Wrapper>

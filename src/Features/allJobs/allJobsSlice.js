@@ -25,9 +25,9 @@ const initialState = {
 // this function is to get all jobs
 export const getAllJobs = createAsyncThunk("get all jobs", async (_, thunkApi) => {
   const {
-    allJobs: { page, searchStatus, searchType },
+    allJobs: { page, searchStatus, searchType, sort, search },
   } = thunkApi.getState(allJobsSlice);
-  const url = `/jobs?status=${searchStatus}&page=${page}&jobType=${searchType}`;
+  const url = `/jobs?status=${searchStatus}&page=${page}&jobType=${searchType}&sort=${sort}${search != "" ? "&search=" + search : ""}`;
   return getAllJobsThunk(url, thunkApi);
 });
 export const showStats = createAsyncThunk("/get-stats", async (_, thunkApi) => {
@@ -48,6 +48,7 @@ const allJobsSlice = createSlice({
       const {
         payload: { name, value },
       } = action;
+      state.page = 1;
       state[name] = value;
     },
     clearFilters: (state) => {
