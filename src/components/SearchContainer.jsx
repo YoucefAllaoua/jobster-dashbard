@@ -13,12 +13,13 @@ const SearchContainer = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLocalSearchI("");
     dispatch(clearFilters());
   };
   // this value is to change the value of the search locally
   const [localSearch, setLocalSearch] = useState("");
   // this is the debounce function
-  const debounce = () => {
+  const debounce = (e) => {
     let timeOutId;
     return (e) => {
       setLocalSearch(e.target.value);
@@ -28,8 +29,8 @@ const SearchContainer = () => {
       }, 1000);
     };
   };
-  useMemo(() => {
-    debounce();
+  const optimizedDebounce = useMemo(() => {
+    return debounce();
   }, []);
   return (
     <Wrapper>
@@ -44,7 +45,7 @@ const SearchContainer = () => {
           name="search"
           value={localSearch}
           // we invoke the function once the component is rendered , so we sue useMemo
-          handleChange={debounce()}
+          handleChange={optimizedDebounce}
         />
         {/* search by status */}
         <FormRowSelect
